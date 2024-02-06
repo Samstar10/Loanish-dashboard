@@ -20,7 +20,8 @@ export class LoginComponent {
   password = '';
   errorMessage = '';
 
-  constructor(private myAppServicesService: MyAppServicesService) { }
+  constructor(private myAppServicesService: MyAppServicesService,
+              private router: Router) { }
 
   onSubmit() {
     this.myAppServicesService.login(this.username, this.password).subscribe({
@@ -28,7 +29,7 @@ export class LoginComponent {
         if (data.success) {
           console.log('Login successful:', data.admin);
           // Redirect to dashboard upon successful login
-
+          this.router.navigate(['/dashboard']);
         } else {
           this.errorMessage = data.message || 'Login failed';
         }
